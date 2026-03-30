@@ -9,19 +9,23 @@
 body { font-family: Arial, sans-serif; background: #f5f5f5; color: #333; }
 header { background: #1a1a2e; color: white; padding: 1rem 1.5rem; display: flex; align-items: center; justify-content: space-between; }
 header h1 { font-size: 18px; font-weight: 600; }
-header span { font-size: 13px; opacity: 0.7; }
-.filtros { background: white; padding: 1rem 1.5rem; border-bottom: 1px solid #e0e0e0; display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-end; }
-.filtros label { font-size: 12px; color: #666; display: block; margin-bottom: 3px; }
-.filtros input, .filtros select { border: 1px solid #ddd; border-radius: 6px; padding: 7px 10px; font-size: 13px; outline: none; }
+header span { font-size: 12px; opacity: 0.7; }
+
+/* FILTROS */
+.filtros { background: white; padding: 1rem; border-bottom: 1px solid #e0e0e0; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.filtros label { font-size: 11px; color: #666; display: block; margin-bottom: 3px; }
+.filtros input, .filtros select { border: 1px solid #ddd; border-radius: 6px; padding: 8px 10px; font-size: 13px; outline: none; width: 100%; }
 .filtros input:focus, .filtros select:focus { border-color: #1a1a2e; }
-.filtros input[type=text] { width: 200px; }
-.filtros input[type=date] { width: 140px; }
-.filtros select { width: 160px; }
-.btn-clear { background: #f0f0f0; color: #333; border: none; border-radius: 6px; padding: 8px 16px; font-size: 13px; cursor: pointer; }
-.stats { background: white; padding: 0.75rem 1.5rem; border-bottom: 1px solid #e0e0e0; display: flex; gap: 24px; font-size: 13px; color: #666; }
+.filtros .full { grid-column: 1 / -1; }
+.btn-clear { background: #f0f0f0; color: #333; border: none; border-radius: 6px; padding: 9px; font-size: 13px; cursor: pointer; width: 100%; }
+
+/* STATS */
+.stats { background: white; padding: 0.6rem 1rem; border-bottom: 1px solid #e0e0e0; display: flex; gap: 16px; font-size: 12px; color: #666; }
 .stats strong { color: #1a1a2e; }
-.tabla-wrap { padding: 1rem 1.5rem; overflow-x: auto; }
-table { width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1); font-size: 13px; }
+
+/* TABLA DESKTOP */
+.tabla-wrap { padding: 1rem; overflow-x: auto; }
+table.principal { width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1); font-size: 13px; }
 thead tr { background: #1a1a2e; color: white; }
 th { padding: 10px 12px; text-align: left; font-weight: 500; cursor: pointer; white-space: nowrap; }
 th:hover { background: #2d2d4e; }
@@ -31,35 +35,63 @@ td { padding: 9px 12px; border-bottom: 1px solid #f0f0f0; white-space: nowrap; }
 tr:hover td { background: #f8f9ff; }
 tr:last-child td { border-bottom: none; }
 .num { text-align: right; }
+
+/* CARDS MOBILE */
+.cards { display: none; padding: 0.75rem; gap: 8px; flex-direction: column; }
+.card { background: white; border-radius: 10px; padding: 12px 14px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+.card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px; }
+.card-codigo { font-size: 15px; font-weight: 700; color: #1a1a2e; cursor: pointer; text-decoration: underline dotted; }
+.card-fecha { font-size: 11px; color: #999; }
+.card-producto { font-size: 13px; color: #333; margin-bottom: 6px; line-height: 1.4; white-space: normal; }
+.card-bottom { display: flex; justify-content: space-between; align-items: center; }
+.card-cantidad { font-size: 13px; color: #555; }
+.card-cantidad span { font-weight: 600; color: #1a1a2e; }
+
+/* BADGES */
 .badge { display: inline-block; padding: 2px 8px; border-radius: 99px; font-size: 11px; font-weight: 500; }
 .badge-alila { background: #e3f2fd; color: #1565c0; }
 .badge-chino { background: #fff3e0; color: #e65100; }
 .badge-other { background: #f3e5f5; color: #6a1b9a; }
 .cod-link { color: #1a1a2e; font-weight: 700; cursor: pointer; text-decoration: underline dotted; }
 .cod-link:hover { color: #4a4a8e; }
-.pagination { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 1rem; font-size: 13px; flex-wrap: wrap; }
+
+/* PAGINACION */
+.pagination { display: flex; align-items: center; justify-content: center; gap: 6px; padding: 1rem; font-size: 13px; flex-wrap: wrap; }
 .pagination button { border: 1px solid #ddd; background: white; border-radius: 6px; padding: 6px 12px; cursor: pointer; font-size: 13px; }
 .pagination button:hover { background: #f0f0f0; }
 .pagination button.active { background: #1a1a2e; color: white; border-color: #1a1a2e; }
+.pagination button:disabled { opacity: 0.4; cursor: default; }
 .no-results { text-align: center; padding: 3rem; color: #999; }
-.overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 100; align-items: center; justify-content: center; }
+
+/* PANEL DETALLE */
+.overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 100; align-items: flex-end; justify-content: center; }
 .overlay.activo { display: flex; }
-.panel { background: white; border-radius: 12px; width: 90%; max-width: 750px; max-height: 85vh; overflow-y: auto; padding: 1.5rem; }
+.panel { background: white; border-radius: 16px 16px 0 0; width: 100%; max-width: 700px; max-height: 85vh; overflow-y: auto; padding: 1.25rem; }
 .panel-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; }
-.panel-titulo { font-size: 16px; font-weight: 500; }
-.panel-subtitulo { font-size: 13px; color: #666; margin-top: 3px; }
-.btn-cerrar { background: none; border: none; font-size: 22px; cursor: pointer; color: #666; line-height: 1; }
-.panel-stats { display: flex; gap: 16px; margin-bottom: 1rem; }
-.panel-stat { background: #f5f5f5; border-radius: 8px; padding: 0.6rem 1rem; font-size: 13px; }
-.panel-stat strong { display: block; font-size: 18px; color: #1a1a2e; }
-.panel table { font-size: 12px; }
+.panel-titulo { font-size: 15px; font-weight: 600; }
+.panel-subtitulo { font-size: 12px; color: #666; margin-top: 3px; }
+.btn-cerrar { background: none; border: none; font-size: 24px; cursor: pointer; color: #666; line-height: 1; padding: 0 4px; }
+.panel-stats { display: flex; gap: 10px; margin-bottom: 1rem; flex-wrap: wrap; }
+.panel-stat { background: #f5f5f5; border-radius: 8px; padding: 0.5rem 0.9rem; font-size: 12px; flex: 1; min-width: 80px; }
+.panel-stat strong { display: block; font-size: 17px; color: #1a1a2e; }
+.panel table { width: 100%; border-collapse: collapse; font-size: 12px; }
 .panel thead tr { background: #f0f0f0; }
-.panel th { color: #333; }
-@media (max-width: 600px) {
-  .filtros { flex-direction: column; }
-  .filtros input, .filtros select { width: 100%; }
-  .tabla-wrap { padding: 0.5rem; }
-  .panel { width: 98%; padding: 1rem; }
+.panel th { padding: 8px 10px; color: #333; font-weight: 500; text-align: left; }
+.panel td { padding: 8px 10px; border-bottom: 1px solid #f5f5f5; }
+.panel tr:last-child td { border-bottom: none; }
+
+/* RESPONSIVE */
+@media (max-width: 640px) {
+  header span { display: none; }
+  .tabla-wrap { display: none; }
+  .cards { display: flex; }
+  .overlay { align-items: flex-end; }
+}
+@media (min-width: 641px) {
+  .filtros { grid-template-columns: repeat(4, 1fr); }
+  .filtros .full { grid-column: auto; }
+  .panel { border-radius: 12px; margin: auto; }
+  .overlay { align-items: center; }
 }
 </style>
 </head>
@@ -71,9 +103,9 @@ tr:last-child td { border-bottom: none; }
 </header>
 
 <div class="filtros">
-  <div>
+  <div class="full">
     <label>Buscar código o producto</label>
-    <input type="text" id="buscar" placeholder="Ej: 88 o AUDIFONOS..." oninput="filtrar()">
+    <input type="text" id="buscar" placeholder="Ej: 88 o CARPA..." oninput="filtrar()">
   </div>
   <div>
     <label>Proveedor</label>
@@ -90,7 +122,7 @@ tr:last-child td { border-bottom: none; }
     <input type="date" id="hasta" onchange="filtrar()">
   </div>
   <div>
-    <button class="btn-clear" onclick="limpiar()">Limpiar</button>
+    <button class="btn-clear" onclick="limpiar()">Limpiar filtros</button>
   </div>
 </div>
 
@@ -99,8 +131,9 @@ tr:last-child td { border-bottom: none; }
   <span>Cantidad total: <strong id="stat-cantidad">0</strong></span>
 </div>
 
+<!-- Vista desktop: tabla -->
 <div class="tabla-wrap">
-  <table>
+  <table class="principal">
     <thead>
       <tr>
         <th onclick="ordenar('fecha')">Fecha</th>
@@ -112,12 +145,16 @@ tr:last-child td { border-bottom: none; }
     </thead>
     <tbody id="tabla-body"></tbody>
   </table>
-  <div class="no-results" id="no-results" style="display:none">No se encontraron resultados</div>
+  <div class="no-results" id="no-results-desk" style="display:none">No se encontraron resultados</div>
 </div>
+
+<!-- Vista mobile: cards -->
+<div class="cards" id="cards-body"></div>
+<div class="no-results" id="no-results-mobile" style="display:none">No se encontraron resultados</div>
 
 <div class="pagination" id="pagination"></div>
 
-<!-- Panel detalle por código -->
+<!-- Panel detalle -->
 <div class="overlay" id="overlay" onclick="cerrarPanel(event)">
   <div class="panel" id="panel">
     <div class="panel-header">
@@ -135,8 +172,6 @@ tr:last-child td { border-bottom: none; }
             <th>Fecha</th>
             <th>Proveedor</th>
             <th class="num">Cantidad</th>
-            <th class="num">Precio unit.</th>
-            <th class="num">Total</th>
           </tr>
         </thead>
         <tbody id="panel-body"></tbody>
@@ -159,10 +194,9 @@ const provs = [...new Set(DATOS.map(function(d){ return d.proveedor; }).filter(B
 provs.forEach(function(p){ document.getElementById('proveedor').innerHTML += '<option>' + p + '</option>'; });
 
 function fmt(n) { return Number(n).toLocaleString('es-CL'); }
-
-function badgeColor(prov) {
-  if (prov === 'ALILA') return 'badge-alila';
-  if (prov === 'CHINO') return 'badge-chino';
+function badgeColor(p) {
+  if (p === 'ALILA') return 'badge-alila';
+  if (p === 'CHINO') return 'badge-chino';
   return 'badge-other';
 }
 
@@ -171,130 +205,128 @@ function filtrar() {
   const prov = document.getElementById('proveedor').value;
   const desde = document.getElementById('desde').value;
   const hasta = document.getElementById('hasta').value;
-
   filtrados = DATOS.filter(function(d) {
-    if (buscar && d.codigo.toLowerCase().indexOf(buscar) === -1 && d.producto.toLowerCase().indexOf(buscar) === -1) return false;
+    if (buscar && d.codigo.toLowerCase().indexOf(buscar)===-1 && d.producto.toLowerCase().indexOf(buscar)===-1) return false;
     if (prov && d.proveedor !== prov) return false;
     if (desde && d.fecha < desde) return false;
     if (hasta && d.fecha > hasta) return false;
     return true;
   });
-
   ordenarData();
   paginaActual = 1;
   renderizar();
 }
 
 function ordenar(col) {
-  if (sortCol === col) sortDir *= -1;
-  else { sortCol = col; sortDir = -1; }
+  if (sortCol === col) sortDir *= -1; else { sortCol = col; sortDir = -1; }
   document.querySelectorAll('th').forEach(function(th){ th.classList.remove('sorted-asc','sorted-desc'); });
-  event.target.classList.add(sortDir === 1 ? 'sorted-asc' : 'sorted-desc');
-  ordenarData();
-  paginaActual = 1;
-  renderizar();
+  event.target.classList.add(sortDir===1?'sorted-asc':'sorted-desc');
+  ordenarData(); paginaActual = 1; renderizar();
 }
 
 function ordenarData() {
-  filtrados.sort(function(a, b) {
-    var va = a[sortCol], vb = b[sortCol];
-    if (typeof va === 'number') return (va - vb) * sortDir;
-    return String(va).localeCompare(String(vb)) * sortDir;
+  filtrados.sort(function(a,b){
+    var va=a[sortCol], vb=b[sortCol];
+    if (typeof va==='number') return (va-vb)*sortDir;
+    return String(va).localeCompare(String(vb))*sortDir;
   });
 }
 
 function limpiar() {
-  document.getElementById('buscar').value = '';
-  document.getElementById('proveedor').value = '';
-  document.getElementById('desde').value = '';
-  document.getElementById('hasta').value = '';
+  document.getElementById('buscar').value='';
+  document.getElementById('proveedor').value='';
+  document.getElementById('desde').value='';
+  document.getElementById('hasta').value='';
   filtrar();
 }
 
 function abrirDetalle(codigo) {
-  var registros = DATOS.filter(function(d){ return d.codigo === codigo; });
-  if (registros.length === 0) return;
-
-  var totalCant = registros.reduce(function(s,d){ return s + (d.cantidad||0); }, 0);
-  var totalMonto = registros.reduce(function(s,d){ return s + (d.total||0); }, 0);
-  var producto = registros[0].producto;
-
+  var regs = DATOS.filter(function(d){ return d.codigo===codigo; });
+  if (!regs.length) return;
+  var totalCant = regs.reduce(function(s,d){ return s+(d.cantidad||0); },0);
+  var producto = regs[0].producto;
   document.getElementById('panel-titulo').textContent = 'Código ' + codigo + ' — ' + producto;
-  document.getElementById('panel-subtitulo').textContent = registros.length + ' compra(s) registrada(s)';
+  document.getElementById('panel-subtitulo').textContent = regs.length + ' compra(s) registrada(s)';
   document.getElementById('panel-stats').innerHTML =
     '<div class="panel-stat"><strong>' + fmt(totalCant) + '</strong>Unidades totales</div>' +
-    '<div class="panel-stat"><strong>$' + fmt(totalMonto) + '</strong>Monto total</div>' +
-    '<div class="panel-stat"><strong>' + registros.length + '</strong>Compras</div>';
-
-  registros.sort(function(a,b){ return b.fecha.localeCompare(a.fecha); });
+    '<div class="panel-stat"><strong>' + regs.length + '</strong>Compras</div>';
+  regs.sort(function(a,b){ return b.fecha.localeCompare(a.fecha); });
   var filas = '';
-  for (var i = 0; i < registros.length; i++) {
-    var d = registros[i];
-    filas += '<tr>' +
-      '<td>' + d.fecha + '</td>' +
-      '<td><span class="badge ' + badgeColor(d.proveedor) + '">' + d.proveedor + '</span></td>' +
-      '<td class="num">' + fmt(d.cantidad) + '</td>' +
-      '</tr>';
+  for (var i=0;i<regs.length;i++) {
+    var d=regs[i];
+    filas += '<tr><td>'+d.fecha+'</td><td><span class="badge '+badgeColor(d.proveedor)+'">'+d.proveedor+'</span></td><td class="num">'+fmt(d.cantidad)+'</td></tr>';
   }
   document.getElementById('panel-body').innerHTML = filas;
   document.getElementById('overlay').classList.add('activo');
 }
 
 function cerrarPanel(e) {
-  if (!e || e.target === document.getElementById('overlay')) {
+  if (!e || e.target===document.getElementById('overlay')) {
     document.getElementById('overlay').classList.remove('activo');
   }
 }
 
 function renderizar() {
-  var inicio = (paginaActual - 1) * POR_PAGINA;
-  var pagina = filtrados.slice(inicio, inicio + POR_PAGINA);
-  var tbody = document.getElementById('tabla-body');
-  var noRes = document.getElementById('no-results');
+  var inicio=(paginaActual-1)*POR_PAGINA;
+  var pagina=filtrados.slice(inicio,inicio+POR_PAGINA);
+  var vacio = filtrados.length===0;
 
-  if (filtrados.length === 0) {
-    tbody.innerHTML = '';
-    noRes.style.display = 'block';
+  // Desktop
+  document.getElementById('no-results-desk').style.display = vacio?'block':'none';
+  // Mobile
+  document.getElementById('no-results-mobile').style.display = vacio?'block':'none';
+
+  if (!vacio) {
+    // Tabla desktop
+    var filas='';
+    for (var i=0;i<pagina.length;i++) {
+      var d=pagina[i];
+      filas+='<tr><td>'+d.fecha+'</td><td><span class="cod-link" onclick="abrirDetalle(''+d.codigo+'')">'+d.codigo+'</span></td><td>'+d.producto+'</td><td><span class="badge '+badgeColor(d.proveedor)+'">'+d.proveedor+'</span></td><td class="num">'+fmt(d.cantidad)+'</td></tr>';
+    }
+    document.getElementById('tabla-body').innerHTML = filas;
+
+    // Cards mobile
+    var cards='';
+    for (var j=0;j<pagina.length;j++) {
+      var d=pagina[j];
+      cards+='<div class="card">'+
+        '<div class="card-top">'+
+          '<span class="card-codigo" onclick="abrirDetalle(''+d.codigo+'')">'+d.codigo+'</span>'+
+          '<span class="card-fecha">'+d.fecha+'</span>'+
+        '</div>'+
+        '<div class="card-producto">'+d.producto+'</div>'+
+        '<div class="card-bottom">'+
+          '<span class="badge '+badgeColor(d.proveedor)+'">'+d.proveedor+'</span>'+
+          '<span class="card-cantidad">Cant: <span>'+fmt(d.cantidad)+'</span></span>'+
+        '</div>'+
+      '</div>';
+    }
+    document.getElementById('cards-body').innerHTML = cards;
   } else {
-    noRes.style.display = 'none';
-    var filas = '';
-    for (var i = 0; i < pagina.length; i++) {
-      var d = pagina[i];
-      filas += '<tr>' +
-        '<td>' + d.fecha + '</td>' +
-        '<td><span class="cod-link" onclick="abrirDetalle(\'' + d.codigo + '\')">' + d.codigo + '</span></td>' +
-        '<td>' + d.producto + '</td>' +
-        '<td><span class="badge ' + badgeColor(d.proveedor) + '">' + d.proveedor + '</span></td>' +
-        '<td class="num">' + fmt(d.cantidad) + '</td>' +
-        '</tr>';
-    }
-    tbody.innerHTML = filas;
+    document.getElementById('tabla-body').innerHTML='';
+    document.getElementById('cards-body').innerHTML='';
   }
 
-  var totalCant = 0;
-  for (var j = 0; j < filtrados.length; j++) totalCant += (filtrados[j].cantidad || 0);
-  document.getElementById('stat-total').textContent = fmt(filtrados.length);
-  document.getElementById('stat-cantidad').textContent = fmt(totalCant);
+  var totalCant=0;
+  for (var k=0;k<filtrados.length;k++) totalCant+=(filtrados[k].cantidad||0);
+  document.getElementById('stat-total').textContent=fmt(filtrados.length);
+  document.getElementById('stat-cantidad').textContent=fmt(totalCant);
 
-  var totalPags = Math.ceil(filtrados.length / POR_PAGINA);
-  var pags = '<button onclick="irPag(' + (paginaActual-1) + ')"' + (paginaActual===1?' disabled':'') + '>← Anterior</button>';
-  for (var p = 1; p <= totalPags; p++) {
-    if (p === 1 || p === totalPags || (p >= paginaActual-2 && p <= paginaActual+2)) {
-      pags += '<button class="' + (p===paginaActual?'active':'') + '" onclick="irPag('+p+')">' + p + '</button>';
-    } else if (p === paginaActual-3 || p === paginaActual+3) {
-      pags += '<span>...</span>';
-    }
+  var totalPags=Math.ceil(filtrados.length/POR_PAGINA);
+  var pags='<button onclick="irPag('+(paginaActual-1)+')"'+(paginaActual===1?' disabled':'')+'>← Ant</button>';
+  for (var p=1;p<=totalPags;p++) {
+    if (p===1||p===totalPags||(p>=paginaActual-2&&p<=paginaActual+2)) {
+      pags+='<button class="'+(p===paginaActual?'active':'')+'" onclick="irPag('+p+')">'+p+'</button>';
+    } else if (p===paginaActual-3||p===paginaActual+3) pags+='<span>...</span>';
   }
-  pags += '<button onclick="irPag(' + (paginaActual+1) + ')"' + (paginaActual===totalPags?' disabled':'') + '>Siguiente →</button>';
-  document.getElementById('pagination').innerHTML = totalPags > 1 ? pags : '';
+  pags+='<button onclick="irPag('+(paginaActual+1)+')"'+(paginaActual===totalPags?' disabled':'')+'>Sig →</button>';
+  document.getElementById('pagination').innerHTML=totalPags>1?pags:'';
 }
 
 function irPag(p) {
-  var total = Math.ceil(filtrados.length / POR_PAGINA);
-  if (p < 1 || p > total) return;
-  paginaActual = p;
-  renderizar();
-  window.scrollTo(0, 0);
+  var total=Math.ceil(filtrados.length/POR_PAGINA);
+  if (p<1||p>total) return;
+  paginaActual=p; renderizar(); window.scrollTo(0,0);
 }
 
 filtrar();
